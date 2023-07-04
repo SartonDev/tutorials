@@ -26,13 +26,6 @@ class user:
     con.commit()
     con.close()
 
-  def update(uid, balance):
-    con = connect()
-    cursor = con.cursor()
-    cursor.execute(f"UPDATE 'users' SET balance = {balance} WHERE uid = {uid}")
-    con.commit()
-    con.close()
-
   def get(uid=None, token=None):
     con = connect()
     cursor = con.cursor()
