@@ -103,9 +103,14 @@ def userget():
     return 'Unknown parameter id'
 ```
 
-Запускаем код. Выполняем GET запрос: .../user.get?id=123
-Получаем: (Баланс)
-GET Запрос готов.
+GET Запрос готов.<br>
+ㅤ<br>
+Демонстрация GET Запроса:<br>
+https://flask-methods-or-api.sartondev.repl.co/user?id=123<br>
+(Можете просто открыть ссылку, либо совершить GET Запрос через сайт https://reqbin.com/post-online)<br>
+ㅤ<br>
+Запускаем код. Выполняем GET запрос: .../user.get?id=123<br>
+Получаем: (Баланс)<br>
 
 <h3>Обработка POST Запроса</h3>
 Тут уже слегка побольше придеться писать, но не на много.
@@ -193,8 +198,14 @@ def userget():
       return jsonify({"Error": "Unsupported value"})
 ```
 
-Готово. Проверим:
-Выполним запрос к ссылке URL/user.get
+Готово. Проверим:<br>
+
+Демонстрация POST Запроса:<br>
+https://flask-methods-or-api.sartondev.repl.co/user.get<br>
+Body: {"id": 123}<br>
+(Отправьте POST Запрос через https://reqbin.com/post-online)<br>
+ㅤ<br>
+Выполним запрос к ссылке URL/user.get<br>
 Передадим JSON:
 ```python
 {'id': 123}
@@ -229,7 +240,7 @@ def userget():
 Конечный код немного отличается ссылками: <br>
 Для GET Запроса действует ссылка: URL/user?id=123<br>
 Для POST Запроса: URL/user.get<br>
-
+ㅤ<br>
 Для проверки кода рекомендую использовать бесплатный интерпритатор, очень похожий по тематике на Github: replit.com <br>
 Создайте репозиторий со стандартным языком Python, в файл main.py перенесите основной код, загрузите со своего устройства код db.py, после чего запустите проект. У вас откроется webview окно replit, где будет ваша основная ссылка. Пример:
 ```
