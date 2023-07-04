@@ -11,10 +11,10 @@ class user:
     con = connect()
     cursor = con.cursor()
     cursor.execute("""CREATE TABLE IF NOT EXISTS 'users'
-  (id INTEGER PRIMARY KEY AUTOINCREMENT,
-  uid INTEGER,
-  balance INTEGER DEFAULT 0,
-  token TEXT)""")
+		(id INTEGER PRIMARY KEY AUTOINCREMENT,
+		uid INTEGER DEFAULT 0,
+		balance INTEGER DEFAULT 0,
+		token TEXT)""")
     con.commit()
     con.close()
 
@@ -22,8 +22,14 @@ class user:
     con = connect()
     cursor = con.cursor()
     cursor.execute(
-      f"INSERT INTO 'users' (uid, balance, token) VALUES ({uid}, {balance}, '{token}')"
-    )
+      f"INSERT INTO 'users' (uid, balance, token) VALUES ({uid}, {balance}, '{token}')")
+    con.commit()
+    con.close()
+
+  def update(uid, balance):
+    con = connect()
+    cursor = con.cursor()
+    cursor.execute(f"UPDATE 'users' SET balance = {balance} WHERE uid = {uid}")
     con.commit()
     con.close()
 
@@ -31,20 +37,18 @@ class user:
     con = connect()
     cursor = con.cursor()
     if not token:
-      if type(uid) in [int, list]:
-        cursor.execute(f"SELECT balance FROM 'users' WHERE uid = {uid}")
-        value = cursor.fetchone()
-        if value:
-          value = value[0]
+      if type(uid) in [int, str]:
+      	cursor.execute(f"SELECT balance FROM 'users' WHERE uid = {uid}")
+      	value = cursor.fetchone()
+      	if value:
+      		value = value[0]
       else:
         uid = ", ".join(list(map(str, uid)))
-        cursor.execute(
-          f"SELECT uid, balance FROM 'users' WHERE cast(uid as text) in ({uid})"
-        )
+        cursor.execute(f"SELECT uid, balance FROM 'users' WHERE cast(uid as text) in ({uid})")
         value = cursor.fetchall()
     else:
-      cursor.execute(f"SELECT * FROM 'users' WHERE token = '{token}'")
-      value = cursor.fetchall()
+    	cursor.execute(f"SELECT * FROM 'users' WHERE token = '{token}'")
+    	value = cursor.fetchall()
     con.commit()
     con.close()
     return value
